@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>WiFi QR Generator project</title>
+</head>
+<body>
+    <div class="main-container">
+        <div class="card">
+            <h1 class="title">WiFi Card Generator</h1>
+            <p class="subtitle">Create and share your WiFi credentials easily</p>
+            <div class="form">
+                <div class="input-group">
+                    <label for="SSID">WiFi Name (SSID):</label>
+                    <input type="text" id="SSID" placeholder="Enter the WiFi Name">
+                </div>
+                <div class="input-group">
+                    <label for="password">Wifi Password:</label>
+                    <input type="password" id="password" placeholder="Enter the WiFi password">
+                </div>
+                <div class="input-group">
+                    <label for="encryption-type">Encryption Type:</label>
+                    <select id="encryption-type">
+                        <option value="WPA">WPA/WPA2</option>
+                        <option value="WEP">WEP</option>
+                        <option value="None">NONE</option>                    
+                    </select>
+                </div>
+                <button id="generate-qr" class="btn-primary">Gerate QR Code</button>
+            </div>
+            <div class="qr-container" id="qr-container"></div>
+            <div class="actions">
+                <button id="copy-btn" class="btn-secondary">Copy Credentials</button>
+                <button id="download-btn" class="btn-secondary">Download QR</button>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.rawgit.com/neocotic/qrious/3.0.0/dist/qrious.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

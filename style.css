@@ -1,0 +1,115 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Poppins', sans-serif;
+    background: #825CFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #fff;
+}
+
+.main-container{
+    width: 90%;
+    max-width: 400px;
+    margin: auto;
+}
+
+.card{
+    background: #fff;
+    border-radius: 15px;
+    padding: 20px 30px;
+    box-shadow: 0 10px 850px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.title{
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.subtitle{
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+label{
+    font-size: 14px;
+    color: #444;
+    margin-bottom: 5px;
+    display: block;
+    text-align: left;
+    margin-top: 10px;
+    padding: 5px 0;
+}
+
+input , select{
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    transition: border 0.3s ease;
+}   
+
+input:focus , select:focus{
+    border: 2.5px solid #6a11cb;
+    outline: none;
+}
+
+.btn-primary , .btn-secondary{
+    padding: 10px 15px;
+    border: none;
+    border-radius: 25px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: transform 0.2s ease , background 0.3s ease;
+}
+
+.btn-primary{
+    background: #6a11cb;
+    color: #fff;
+}
+
+.btn-primary:hover{
+    background: #2d025c;
+    transform: scale(1.05);
+}
+
+.btn-secondary{
+    background: #f4f4f4;
+    color: #333;
+    margin-top: 10px;
+}
+
+.btn-secondary:hover{
+    background: #000000;
+    color:#fff;
+    transform: scale(1.05);
+}
+
+.qr-container{
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.canvas{
+    margin: 20px 0;
+}
+
+.actions{
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
