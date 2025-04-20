@@ -1,56 +1,75 @@
-document.getElementById("generate-qr").addEventListener("click", generateQRcode);
-document.getElementById("copy-qr").addEventListener("click", copyCredentials);
-document.getElementById("download-qr").addEventListener("click", downloadQRcode);
+const generateQRButton = document.getElementById("generate-qr");
+const copyButton = document.getElementById("copy-btn");
+const downloadButton = document.getElementById("download-btn");
+const ssidInput = document.getElementById("SSID");
+const passwordInput = document.getElementById("password");
+const encryptionSelect = document.getElementById("encryption-type");
+const qrContainer = document.getElementById("qr-container");
+
+
+let qr;
+
 
 function generateQRcode() {
-    const SSID = document.getElementById("SSID").value.trim();
-    const password = document.getElementById("password").value.trim();
-    const security = document.getElementById("encryption-type").value.trim();  // Use this variable
+    const ssid = ssidInput.value.trim();
+    const password = passwordInput.value.trim();
+    const encryption = encryptionSelect.value;
 
-    if (!SSID || !password) {
-        alert("Please enter the SSID/password");
+    if (ssid === "") {
+        alert("Please enter a WiFi Name (SSID).");
+        return;
+    }
+    if (encryption !== "None" && password === "") {
+        alert("Please enter the WiFi password for encrypted networks.");
         return;
     }
 
-    const qrText = `WIFI:T:${security};SS:${SSID};P:${password};;`;  // Use `security` here
-    const qrContainer = document.getElementById("qr-container");
-    qrContainer.innerHTML = ""; // Clear any previous QR code
-    const qr = new QRious({
+    const qrValue = `WIFI:S:${ssid};T:${encryption};P:${password};;`;
+
+    qr = new QRious({
         element: document.createElement("canvas"),
-        value: qrText,
+        value: qrValue,
         size: 200,
-        foreground: "#6a11cb",
-        background: "#ffffff",
     });
+
+    qrContainer.innerHTML = "";
     qrContainer.appendChild(qr.element);
 }
 
 function copyCredentials() {
-    const SSID = document.getElementById("SSID").value.trim();
-    const password = document.getElementById("password").value.trim();
+    const ssid = ssidInput.value.trim();
+    const password = passwordInput.value.trim();
+    const encryption = encryptionSelect.value;
 
-    if (!SSID || !password) {
-        alert("Please enter the SSID/password");
+    if (ssid === "") {
+        alert("Nothing to copy. Please enter the WiFi Name (SSID).");
         return;
     }
 
-    const text = `SSID: ${SSID}\nPassword: ${password}`;
-    navigator.clipboard.writeText(text).then(function() {
-        alert("Copied to clipboard");
-    }, function(err) {
-        alert("Failed to copy to clipboard");
-    });
+    const credentials = `WiFi Name: ${ssid}\nEncryption Type: ${encryption}\nPassword: ${password}`;
+    navigator.clipboard.writeText(credentials)
+        .then(() => {
+            alert("WiFi credentials copied to clipboard!");
+        })
+        .catch(() => {
+            alert("Failed to copy. Please try again.");
+        });
 }
 
 function downloadQRcode() {
-    const qrCanvas = document.querySelector("#qr-container canvas"); // Fixed typo here
-    if (!qrCanvas) {
-        alert("Please generate the QR code first");
+    if (!qr) {
+        alert("No QR code available to download. Generate one first!");
         return;
     }
 
-    const link = document.createElement("a");
-    link.href = qrCanvas.toDataURL();
-    link.download = "wifi-qr-code.png";
-    link.click();
+    const qrImage = qr.element.toDataURL("image/png");
+    const downloadLink = document.createElement("a");
+
+    downloadLink.href = qrImage;
+    downloadLink.download = "WiFiQRCode.png";
+    downloadLink.click();
 }
+
+generateQRButton.addEventListener("click", generateQRcode);
+copyButton.addEventListener("click", copyCredentials);
+downloadButton.addEventListener("click", downloadQRcode);
